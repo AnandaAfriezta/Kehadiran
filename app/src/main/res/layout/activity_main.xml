@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/main">
+
+        <ImageButton
+            android:id="@+id/Ib_Home"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="20dp"
+            android:clickable="true"
+            />
+
+        <ImageButton
+            android:id="@+id/Ib_Award"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/trophy"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvChartName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Data Kehadiran"
+        android:textSize="30sp"
+        android:fontFamily="@font/poppinsbold"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"/>
+
+    <com.db.williamchart.view.HorizontalBarChartView
+        android:id="@+id/verticalbarchart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        app:chart_barsColor="@color/main"
+        app:chart_barsRadius="4dp"
+        app:chart_labelsColor="@color/black"
+        app:chart_labelsSize="12sp"
+        app:chart_spacing="20dp" />
+</LinearLayout>
