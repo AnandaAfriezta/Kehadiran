@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var barChart: BarChartView
     private lateinit var horizontabarchart : HorizontalBarChartView
     lateinit var btnAward: ImageButton
+    lateinit var btnTable: ImageButton
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         btnAward.setOnClickListener{
             val moveIntent = Intent(this@MainActivity, AwardActivity::class.java)
             startActivity(moveIntent)
+            finish()
+        }
+        btnTable = findViewById(R.id.Ib_Table)
+        btnTable.setOnClickListener {
+            val moveIntent = Intent(this@MainActivity, TableActivity::class.java)
+            startActivity(moveIntent)
+            finish()
         }
         // Mengambil referensi ke tabel kehadiran
         val database = FirebaseDatabase.getInstance()

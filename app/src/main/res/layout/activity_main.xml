@@ -24,7 +24,6 @@
             android:layout_marginLeft="20dp"
             android:clickable="true"
             />
-
         <ImageButton
             android:id="@+id/Ib_Award"
             android:layout_width="24dp"
@@ -34,7 +33,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <ImageButton
+            android:id="@+id/Ib_Table"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@drawable/table"
+            android:clickable="true"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tvChartName"
