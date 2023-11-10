@@ -133,6 +133,7 @@ class TableActivity : AppCompatActivity() {
             val no = dataSnapshot.child("No").value.toString()
             val name = dataSnapshot.child("Name").value.toString()
             val dateString = dataSnapshot.child("DateTime").value.toString()
+            val status = dataSnapshot.child("Status").value.toString()
 
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             dateFormat.timeZone = TimeZone.getTimeZone("UTC")
@@ -143,27 +144,33 @@ class TableActivity : AppCompatActivity() {
                 val row = TableRow(this)
                 val nameTextView = TextView(this)
                 val dateTimeTextView = TextView(this)
+                val statusTextView = TextView(this)
 
                 val customTypeface = ResourcesCompat.getFont(this, R.font.poppinsmedium)
                 noTextView.typeface = customTypeface
                 nameTextView.typeface = customTypeface
                 dateTimeTextView.typeface = customTypeface
+                statusTextView.typeface = customTypeface
 
                 noTextView.setTextColor(ContextCompat.getColor(this, R.color.main))
                 nameTextView.setTextColor(ContextCompat.getColor(this, R.color.main))
                 dateTimeTextView.setTextColor(ContextCompat.getColor(this, R.color.main))
+                statusTextView.setTextColor(ContextCompat.getColor(this, R.color.main))
 
                 noTextView.text = no
                 nameTextView.text = name
                 dateTimeTextView.text = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(dateTime)
+                statusTextView.text = status
 
                 noTextView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
                 nameTextView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
                 dateTimeTextView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
+                statusTextView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
 
                 row.addView(noTextView)
                 row.addView(nameTextView)
                 row.addView(dateTimeTextView)
+                row.addView(statusTextView)
 
                 tableLayout.addView(row)
             }
