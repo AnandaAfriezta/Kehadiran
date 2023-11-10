@@ -14,9 +14,11 @@ class AwardActivity : AppCompatActivity() {
     lateinit var btnHome: ImageButton
     lateinit var btnTable: ImageButton
     private lateinit var resultTextView: TextView
+    private lateinit var resultTextView2: TextView
     private lateinit var DescTextView: TextView
     private lateinit var database: FirebaseDatabase
     private lateinit var namesRef: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +38,13 @@ class AwardActivity : AppCompatActivity() {
             finish()
         }
         resultTextView = findViewById(R.id.resultTextView)
+        resultTextView2 = findViewById(R.id.resultTextView2)
         DescTextView = findViewById(R.id.tv_desc1)
         database = FirebaseDatabase.getInstance()
         namesRef = database.getReference("1c27wQexbj78D4NFKKGyyJosZGeHWAgbdlJe2MChQ4zY/Sheet1")
 
         fetchDataFromFirebase()
+        fetchMostRecentName()
 
     }
 
@@ -72,6 +76,43 @@ class AwardActivity : AppCompatActivity() {
                     DescTextView.text = descText
                 } else {
                     resultTextView.text = "Tidak ada nama dengan duplikat."
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                resultTextView.text = "Error: ${error.message}"
+            }
+        })
+    }
+    private fun fetchMostRecentName() {
+        namesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val namesOnMostRecentDate = mutableSetOf<String>()
+                var mostRecentDate = ""
+
+                for (snapshot in dataSnapshot.children) {
+                    val nameMap = snapshot.value as HashMap<*, *>
+                    val name = nameMap["Name"] as String?
+                    val date = nameMap["DateTime"] as String?
+
+                    if (name != null && date != null) {
+                        if (date > mostRecentDate) {
+                            mostRecentDate = date
+                            namesOnMostRecentDate.clear()
+                        }
+                        if (date == mostRecentDate) {
+                            namesOnMostRecentDate.add(name)
+                        }
+                    }
+                }
+
+                val totalNamesOnMostRecentDate = namesOnMostRecentDate.size
+
+                if (totalNamesOnMostRecentDate > 0) {
+                    val resultText = "Jumlah yang hadir hari ini \n$totalNamesOnMostRecentDate"
+                    resultTextView2.text = resultText
+                } else {
+                    resultTextView2.text = "Tidak ada nama yang hadir pada tanggal terbaru."
                 }
             }
 
